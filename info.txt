@@ -1,0 +1,5 @@
+Theme      : Orchis Dark
+Icons      : We10X-Blue
+Font       : SF Mono
+Terminal   : Kitty
+Browser    : Chromium

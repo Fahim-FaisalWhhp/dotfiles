@@ -1,0 +1,296 @@
+# Web-Browser
+alt + w 
+   jumpapp chromium
+
+# File-manager
+alt + f 
+  jumpapp nemo
+
+# Cli-File-Manager
+super + f
+ kitty -1 --class=ranger ./.scripts/ranger/ranger.py
+  
+# Rofi-File Manager
+alt + o
+   rofi  -yoffset "-300" -no-fixed-num-lines -show file-browser-extended -display-file-browser-extended "files"
+
+# Switch Windows with Rofi
+alt + Escape
+ ~/.scripts/workspace.sh
+
+# Mpd Play (wireless)
+XF86AudioPlay 
+  mpc play
+
+# Mpd Pause (wireless)
+XF86AudioPause
+  mpc pause
+
+# Mpd Previous Song (Wireless)
+XF86AudioNext 
+  mpc prev
+
+# Mpd Next Song (Wireless)
+XF86AudioPrev
+  mpc next
+
+# Pause Music (mpd)
+control + space
+  mpc toggle
+
+# Next song (mpd)
+control + Left
+  mpc prev
+
+# Previous song (mpd)
+control + Right
+  mpc next 
+
+# Increase Volumn (mpd)
+control + Up
+  mpc volume +5
+
+# Decrease Volumn (mpd)
+control + Down
+  mpc volume -5
+
+# Skip 5 second ahead (mpd)
+control + shift + Right
+  mpc seek +5
+
+# Skip 5 second previous (mpd)
+control + shift + Left
+  mpc seek -5
+
+# Pause Media (mpris)
+Menu 
+  playerctl play-pause
+
+# Next media (mpris)
+ctrl + period
+  playerctl next
+
+# Next media (mpris)
+ctrl + comma
+  playerctl previous
+ 
+# Rofi-Mpris Menu
+alt + p
+  python ~/.scripts/empris.py
+
+
+# Rofi-youtube Menu
+alt + y
+  ytfzf -N -D -l 
+  
+# Rofi-clipboard Menu
+alt + c
+  rofi  -yoffset "-200" -no-fixed-num-lines -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+ 
+# Rofi-mpd Menu
+alt + m
+  rofi-mpc
+
+# Rofi-Documents Menu
+alt + b
+  ~/.scripts/books-search.sh
+
+# Rofi Config Menu
+super + c
+  /home/fh1m/.scripts/dmscripts/scripts/dm-confedit
+
+# Rofi-kill Menu
+super + k
+   /home/fh1m/.scripts/dmscripts/scripts/dm-kill
+
+# Rofi-notes in Markdown
+alt + n
+   /home/fh1m/.scripts/note-search_markdown.sh  
+
+# Rofi-Books Menu
+super + b
+  /home/fh1m/.scripts/Books.sh 
+
+# Rofi-notes in Latex
+super + n
+  /home/fh1m/.scripts/notes_latex.sh
+
+# Rofi-notes in Pdf
+super + shift + n
+  /home/fh1m/.scripts/notes_pdf.sh
+
+# Terminal
+super + Return
+	jumpapp -f kitty -1 ~/.scripts/startmux 
+
+# Program Launcher
+shift + space
+	 ~/.config/rofi/launchers/colorful/launcher.sh
+
+# Reload Sxhkd
+control + Escape
+	pkill -USR1 -x sxhkd
+
+# Quit/restart bspwm
+super + {shift+q,r}
+	bspc {quit,wm -r}
+
+# Close Windows
+alt + {_,shift + }F1
+	bspc node -{c,k}
+
+# Make Current Window Full
+super + m
+	bspc desktop -l next
+
+# Swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+# Set the window state
+super + {t,shift + t,s,shift+f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# Focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# Move Forward regardless of active or not
+shift + Tab
+  bspc desktop -f next.local
+
+# Move back regardless active or not 
+shift + Escape
+  bspc desktop -f prev.local
+
+#Move to Next Window
+alt + Tab 
+  bspc desktop -f 'next.occupied'
+
+# Move to Previous Window
+alt + grave
+  bspc desktop -f 'prev.occupied'
+
+# Switch to last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# Focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# Focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+  bspc {desktop -f,node -d} '^{1-9,10}' 
+
+# Move focused window to the next or previous workspace and then switch to that workspace
+alt + shift + {Left,Right}
+    id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
+
+# Hide curent focused window
+super + h
+  ~/.scripts/hide
+
+# Hide all windows in all workspaces 
+super + shift + h
+  if [ -n "$(bspc query -N -n .hidden)" ]; then flag=off else flag=on; fi && for i in $(bspc query -N); bspc node $i -g hidden=$flag
+
+# Powermenu
+super + p
+  powermenu
+
+# List windows as searchable with Rofi
+super + l
+  rofi -show window -no-fixed-num-lines -yoffset "-100"
+
+# Go to next empty workspace
+super + e
+  bspc desktop -f 'next.!occupied'
+
+# Goto Previous empty workspace
+super + q
+  bspc desktop -f 'prev.!occupied'
+
+# Watch youtube with mpv
+super + y
+ ~/.scripts/youtube
+ 
+# Mpd Full-on Mode
+alt + shift + m
+  chromium http://localhost:6680/iris/kiosk-mode
+
+# Take screenshot 
+Print
+  flameshot gui
+
+# Full Window Screen shot
+shift + Print
+  flameshot full -p ~/Pictures/Screenshots
+
+# Run prompt
+alt + F2
+  gmrun
+
+# Normal Terminal
+alt + Return
+  kitty --class=Terminal
+
+# Search last copyed text on google
+alt + s
+  ~/.local/bin/clip
+
+# Sxhkd rofi menu
+alt + shift + h
+  ~/.scripts/help
+
+# Twitch
+control + alt + t
+  rofi-ttv
+
+# Notify when Caps-Lock is on
+Caps_Lock
+    sleep 0.2 && if [ "$(xset q | grep Caps | awk '\{print $4\}')" = 'on' ]; then dunstify -a System -t 1200 -h string:x-dunst-stack-tag:caps "Caps Lock Enabled"; else dunstify -a System -t 1200 -h string:x-dunst-stack-tag:caps "Caps Lock Disabled"; fi
+
+# Turn down volumn
+XF86AudioLowerVolume
+  ponymix decrease 5 --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% "
+
+# Turn up volum
+XF86AudioRaiseVolume
+  ponymix increase 5  --max-volume 200 && dunstify -a System -t 10000 -h string:x-dunst-stack-tag:volume -h int:value:$( ponymix get-volume) "  Volume: $(ponymix get-volume)% " 
+
+# Mute Mic
+XF86AudioMicMute
+  amixer set Capture toggle && amixer get Capture | grep '\[off\]' && notify-send "MIC switched OFF" || notify-send "MIC switched ON"
+
+# Make the current window bigger
+super + space
+  ~/.scripts/focus.sh
+
+# go places
+super + Escape
+  ~/.scripts/go.sh
+
+# Run Tasks
+ctrl + Return
+  ~/.scripts/tasks/task.sh
+
+# Change orientation
+super + equal
+  bspc node -n last.automatic
+
+# Jump to mpv
+super + v
+  jumpapp mpv
+
+

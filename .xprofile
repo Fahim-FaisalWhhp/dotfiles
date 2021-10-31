@@ -1,0 +1,12 @@
+tmux start-server
+tmux new-session -d -s Main
+
+mopidy &
+
+pkill empty
+$HOME/.scripts/empty&
+
+
+
+
+
